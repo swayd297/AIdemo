@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Date Time Checker</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 2rem; }
+      .row { margin-bottom: .5rem; }
+      input { padding: .4rem .6rem; margin-right: .5rem; width: 6rem; }
+      #check-btn { padding: .5rem .8rem; }
+      .result-section { margin-top: 1rem; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <h1>Date Time Checker</h1>
+    <div class="row">
+      <input id="day" placeholder="Day" />
+      <input id="month" placeholder="Month" />
+      <input id="year" placeholder="Year" />
+      <button id="check-btn">Check</button>
+    </div>
+    <div class="result-section"></div>
+
+    <script>
+      const out = document.querySelector('.result-section');
+      document.getElementById('check-btn').addEventListener('click', () => {
+        const d = +document.getElementById('day').value;
+        const m = +document.getElementById('month').value;
+        const y = +document.getElementById('year').value;
+
+        if (!Number.isInteger(m) || m < 1 || m > 12) return out.textContent = 'Invalid month';
+        if (!Number.isInteger(d) || d < 1 || d > 31) return out.textContent = 'Invalid day';
+        if (!Number.isInteger(y) || y < 1) return out.textContent = 'Invalid year';
+
+        // basic month/day limit check for demo (no leap-year logic)
+        const mdMax = {1:31,2:29,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}[m];
+        if (d > mdMax) return out.textContent = 'Invalid day';
+
+        out.textContent = 'Valid Date';
+      });
+    </script>
+  </body>
+  </html>
